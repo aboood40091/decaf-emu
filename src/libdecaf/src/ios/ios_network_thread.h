@@ -1,4 +1,6 @@
 #pragma once
+#include "common/platform.h"
+
 #include <ares.h>
 #include <functional>
 #include <uv.h>

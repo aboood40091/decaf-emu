@@ -4,6 +4,7 @@ include_directories(".")
 include_directories("../src")
 
 add_subdirectory(gfd-tool)
+add_subdirectory(gx2shader-decompiler)
 add_subdirectory(latte-assembler)
 
 if(DECAF_GL)

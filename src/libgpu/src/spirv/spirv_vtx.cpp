@@ -301,7 +301,7 @@ void Transpiler::translateVtx_SEMANTIC(const ControlFlowInst &cf, const VertexFe
    auto sourceType = mSpv->vecType(sourceElemType, fmtMeta.inputCount);
 
    // Create the input variable
-   auto sourceVar = mSpv->inputAttribVar(static_cast<uint32_t>(inputId), sourceType);
+   auto sourceVar = mSpv->inputAttribVar(static_cast<uint32_t>(inputId), sourceType, static_cast<int32_t>(inst.padding));
 
    // Load the input data
    auto source = mSpv->createLoad(sourceVar);

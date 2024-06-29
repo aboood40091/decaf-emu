@@ -5,6 +5,9 @@
 #include "spirv_pushconstants.h"
 #include "gpu_config.h"
 
+extern std::string* CurrentAttribNames;
+extern size_t MaxAttribCount;
+
 namespace spirv
 {
 
@@ -1269,12 +1272,13 @@ public:
       return mPointSize;
    }
 
-   spv::Id inputAttribVar(int semLocation, spv::Id attribType)
+   spv::Id inputAttribVar(int semLocation, spv::Id attribType, int nameIdx=-1)
    {
       auto attribIdx = mAttribInputs.size();
 
       auto attribVar = createVariable(spv::StorageClassInput, attribType,
-                                      fmt::format("INPUT_{}", attribIdx).c_str());
+                                      ((CurrentAttribNames != NULL && 0 <= nameIdx && nameIdx <= MaxAttribCount)
+                                       ? CurrentAttribNames[nameIdx] : fmt::format("INPUT_{}", attribIdx)).c_str());
       addDecoration(attribVar, spv::DecorationLocation, static_cast<int>(semLocation));
 
       mEntryPoint->addIdOperand(attribVar);
